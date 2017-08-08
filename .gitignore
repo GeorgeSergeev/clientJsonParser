@@ -1,0 +1,5 @@
+# Created by .ignore support plugin (hsz.mobi)
+/.idea
+ps-file-importer.iml
+/file-importer.log
+target/*

@@ -1,0 +1,16 @@
+import com.alvion.importer.models.Subscriber
+import com.alvion.importer.models.ClientResult;
+
+rule "processClient"
+    when
+        $clientResult : ClientResult( client : client )
+    then
+        long sumSpent = 0;
+        for (Subscriber sub : client.getSubscribers()) {
+        	sumSpent += sub.getSpent();
+        }
+
+        $clientResult.getStatistic().setClientId(client.getClientId());
+        $clientResult.getStatistic().setSpentTotal(sumSpent);
+        $clientResult.getStatistic().setIsBig(client.getSubscribers().size() > 100);
+end
